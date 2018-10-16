@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="title"
+        required
+        minlength="3"
+        [ngModel]="post?.title"
+        placeholder="Ingrese un título"
+        #title="ngModel">
+        <mat-error *ngIf="title.invalid">Por favor ingrese un título</mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-stroked-button type="button" (click)="filePicker.click()">Cargar imagen</button>
+      <input type="file" #filePicker>
+    </div>
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="3"
+        name="content"
+        required
+        [ngModel]="post?.content"
+        placeholder="Ingrese un contenido"
+        #content="ngModel">
+      </textarea>
+      <mat-error *ngIf="content.invalid">Por favor ingrese un contenido</mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit">Guardar Post</button>
+
+  </form>
+</mat-card>
